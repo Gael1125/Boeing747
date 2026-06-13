@@ -130,6 +130,16 @@ genuinely absent):
   - Attachments: knobs, switches, buttons, dials, labels, logos, screws,
     hinges, latches. These add character even when tiny.
   - Caps and endings: bottle caps, pen caps, lid knobs, foot pads, tips.
+  - Surface readability cues: seams, stitching, panel split lines, trim rings,
+    engraved/printed text bands, waterline/liquid-level cues in transparent cups.
+
+## Fidelity sanity check before output
+
+Before finalizing the JSON, verify all three are covered in `scene_brief`
+or `parts[].narrative`:
+  1) dominant silhouette/proportions,
+  2) dominant color tones (include hex when confident),
+  3) identity-defining small parts (handles/spouts/buttons/logos/mirrors/etc).
 
 ## Rules
 

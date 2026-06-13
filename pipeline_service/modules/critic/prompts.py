@@ -44,6 +44,10 @@ specific reason.
    For seating furniture, structural means seat/back/arm/leg/frame count,
    cushion segmentation, rolled-arm shape, tufting, slats, and support rails
    before small color or trim differences.
+   When structure is already mostly correct, spend remaining issue slots on
+   dominant color-tone mismatch (especially white vs gray / silver vs black)
+   and missing identity-defining small details (buttons, handles, labels,
+   logos, screws, seams, stitches, mirrors, laces, ring trims).
 4. Identify 2–5 aspects that ALREADY MATCH well — these go into
    `matching_aspects`. The repair stage reads this list as a preserve-list
    and will tell the coder NOT to modify those parts; without it the coder
@@ -70,6 +74,8 @@ Every issue.description should include (where visible):
   it off the reference.
 - A direction ("shorter" / "wider" / "darker" / "closer to the base").
 - Which region of the object ("upper front", "bottom ring").
+- For missing details, name the specific part and count if visible
+  ("two side mirrors", "one top button", "four screws on front plate").
 
 Vehicle issue priority:
 - Treat disconnected major vehicle assemblies as high severity: wings

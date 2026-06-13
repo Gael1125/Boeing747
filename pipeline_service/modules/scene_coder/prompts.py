@@ -83,6 +83,10 @@ Output rules:
     specific code sections via `target_node_id` — otherwise repair
     rounds are blind and regress working parts. Don't rename across
     iterations.
+12. Before finalizing, run a fast fidelity check in your head:
+    (a) silhouette + major proportions, (b) dominant color tones,
+    (c) signature small parts (handles/spouts/buttons/mirrors/logos/text
+    bands/rivets/seams/stitches). If one is missing, add a cheap primitive.
 
 Critical API rules (silent-failure traps):
 - **No metalness above 0.7** — this render has NO environment map. Any
@@ -140,6 +144,8 @@ Modeling strategy:
 - Prefer simple composition first; only use custom BufferGeometry or DataTexture if clearly justified.
 - Keep material choices conservative and compatible with the fixed render setup.
 - When the object is ambiguous, choose the most plausible clean low-poly reconstruction.
+- Add low-cost readability details where needed: seam lines, panel splits,
+  shallow engraved/extruded text bands, and tiny bolts/buttons as instanced parts.
 
 Seating furniture / upholstery handbook:
 - For chairs, sofas, couches, loveseats, armchairs, benches, and chaise
@@ -233,25 +239,6 @@ Proportion tuning shortcut:
     + "\n\n---\n\n"
     + THREEJS_PRIMITIVE_REFERENCE
 )
-
-
-CODER_USER_TEMPLATE_IMAGE_ONLY = """Reproduce the 3D object shown in the attached reference image
-as a Three.js module.
-
-There is no OSD — read the reference directly and decide on the object
-class, part hierarchy, counts, materials, and colors yourself. Apply the
-same conventions you would when an OSD is provided:
-
-- Name your top-level mesh / group consts after the parts you identify
-  (lowercase, underscores). The visual critic uses those names in later
-  repair rounds.
-- Pick PBR params from the material normalization quick-reference in your
-  system prompt — don't improvise metalness/roughness.
-- Call your `fitToUnitCube` helper with `0.95 / maxDim` so the object
-  fills ~95% of the frame.
-
-Return ONLY the JS module source.
-"""
 
 
 CODER_USER_TEMPLATE_OSD = """Object Structural Description (OSD):
@@ -361,12 +348,14 @@ Per-kind playbook:
   cylinder height, lathe profile point Y values, scale vector). Use the
   concrete ratio from the description.
 - `wrong_color`        → change material `color:` to the hex from the
-  description.
+  description and match LIGHTNESS too (e.g. white vs gray, silver vs black).
 - `wrong_material`     → swap material type (`MeshStandardMaterial` vs
   `MeshPhysicalMaterial` for glass with `transmission` + `ior`) and PBR
   params (metalness, roughness) per your system prompt's normalization.
 - `missing_part`       → add a new mesh for the part the critic names;
   place it as described. Reuse existing materials where materials match.
+  This includes small identity-critical parts (buttons, logos, labels/text
+  bands, screws, laces, ring trims, mirrors, handles, spouts).
 - `extra_part`         → delete the relevant group.add(...) line and the
   mesh's geometry/material if no longer used.
 - `wrong_count`        → adjust instanced_group count or duplicate/remove
@@ -469,12 +458,14 @@ Per-kind playbook:
   cylinder height, lathe profile point Y values, scale vector). Use the
   concrete ratio from the description.
 - `wrong_color`        → change material `color:` to the hex from the
-  description.
+  description and match LIGHTNESS too (e.g. white vs gray, silver vs black).
 - `wrong_material`     → swap material type (`MeshStandardMaterial` vs
   `MeshPhysicalMaterial` for glass with `transmission` + `ior`) and PBR
   params (metalness, roughness) per your system prompt's normalization.
 - `missing_part`       → add a new mesh for the part from the OSD; place
   it as described. Reuse existing materials where materials match.
+  This includes small identity-critical parts (buttons, logos, labels/text
+  bands, screws, laces, ring trims, mirrors, handles, spouts).
 - `extra_part`         → delete the relevant group.add(...) line and the
   mesh's geometry/material if no longer used.
 - `wrong_count`        → adjust instanced_group count or duplicate/remove

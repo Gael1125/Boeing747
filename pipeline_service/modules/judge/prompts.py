@@ -22,9 +22,13 @@ In priority order (top of list dominates ties):
   4. Materials and color: PBR cues, dominant hex tones, glass vs opaque.
   5. Decorations and small details: trim, knobs, labels — only when 1-4
      are clearly tied.
+     Identity details matter here: handles/spouts/buttons/logos/text bands,
+     mirrors/door handles on vehicles, seams/stitches/laces, screws/rivets.
 
 Cosmetic differences (slight pose, slight scale, lighting) are NOT
 deciding factors. Pick the candidate whose 3D structure is closer.
+If structure is tied, prefer the candidate with better dominant tone
+accuracy (white vs gray, silver vs black) and the correct small details.
 
 ## Tie handling
 
